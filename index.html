@@ -3,702 +3,584 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wanchat — Digital Asset & Web3</title>
+  <title>wanchat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:        #faf9f7;
-      --surface:   #f2f0ec;
-      --border:    #e5e2dc;
-      --text:      #1a1816;
-      --muted:     #7a7670;
-      --accent:    #c45e2e;
-      --accent2:   #2e6bc4;
-      --tag-bg:    #edeae5;
-      --tag-text:  #5a5650;
-      --radius:    12px;
-      --font-sans: 'Inter', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #888888;
+      --border: #ebebeb;
+      --hover: #555555;
+      --tag: #f3f3f3;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg:       #111010;
-        --surface:  #1c1b1a;
-        --border:   #2d2c2a;
-        --text:     #f0ede8;
-        --muted:    #8a8580;
-        --accent:   #e07040;
-        --accent2:  #5a9aea;
-        --tag-bg:   #252420;
-        --tag-text: #a0998f;
+        --bg: #0a0a0a;
+        --text: #ededed;
+        --muted: #777777;
+        --border: #222222;
+        --hover: #aaaaaa;
+        --tag: #1a1a1a;
       }
     }
 
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: var(--font-sans);
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-size: 15px;
-      line-height: 1.7;
-      transition: background 0.3s, color 0.3s;
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
-    a:hover { color: var(--accent); }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover { color: var(--hover); }
 
-    /* ── Layout ── */
-    .container {
-      max-width: 680px;
+    /* ── wrapper ── */
+    .wrap {
+      max-width: 580px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
-    /* ── Nav ── */
+    /* ── nav ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 0 0;
     }
-
     .nav-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-
+    .nav-logo img {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      object-fit: cover;
+      image-rendering: pixelated;
+    }
+    .nav-logo .logo-fallback {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
     .nav-links {
       display: flex;
-      gap: 24px;
+      align-items: center;
+      gap: 20px;
       list-style: none;
     }
-
     .nav-links a {
       font-size: 13px;
       color: var(--muted);
-      transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--text); }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 64px 0 48px;
+    .nav-socials {
       display: flex;
-      gap: 32px;
-      align-items: flex-start;
+      align-items: center;
+      gap: 14px;
     }
+    .nav-socials a {
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+    }
+    .nav-socials a:hover { color: var(--text); }
 
-    .avatar-wrap {
+    /* ── hero ── */
+    .hero {
+      padding: 40px 0 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .avatar {
       flex-shrink: 0;
-      width: 96px;
-      height: 96px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid var(--border);
-      image-rendering: pixelated;
+      background: #f0f0f0;
     }
-
-    .avatar-wrap img {
+    .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       image-rendering: pixelated;
     }
-
-    /* Pixel avatar fallback (CSS art) */
-    .pixel-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: #f2c9b0;
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
-      flex-shrink: 0;
-      overflow: hidden;
-      position: relative;
+      font-size: 26px;
     }
-
-    .hero-text h1 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 4px;
+    .hero-body { flex: 1; }
+    .hero-body h1 {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 1px;
     }
-
-    .hero-text .role {
-      font-size: 14px;
+    .hero-body .role {
+      font-size: 13px;
       color: var(--muted);
-      font-family: var(--font-mono);
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
-
-    .hero-text p {
-      font-size: 14px;
+    .hero-body p {
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.75;
-      max-width: 480px;
+      line-height: 1.65;
+      max-width: 440px;
     }
 
-    .social-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+    /* ── section ── */
+    section { padding: 28px 0; border-top: 1px solid var(--border); }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
     }
 
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    /* ── experience ── */
+    .exp-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-row:last-child { border-bottom: none; }
+    .exp-date {
       font-size: 12px;
       color: var(--muted);
-      font-family: var(--font-mono);
-      transition: all 0.2s;
-      background: var(--surface);
-    }
-
-    .social-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--bg);
-    }
-
-    /* ── Divider ── */
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 8px 0 40px;
-    }
-
-    /* ── Section ── */
-    section { margin-bottom: 52px; }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    /* ── Experience Timeline ── */
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-
-    .exp-item {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 0 20px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
-    .exp-item:last-child { border-bottom: none; }
-
-    .exp-date {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      padding-top: 3px;
+      padding-top: 2px;
       line-height: 1.5;
     }
-
-    .exp-content {}
-
-    .exp-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
+    .exp-right {}
+    .exp-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 3px;
     }
-
-    .exp-company {
+    .exp-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--tag);
+    }
+    .exp-logo-fallback {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--tag);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .exp-title {
       font-size: 13px;
-      color: var(--accent);
+      font-weight: 500;
+    }
+    .exp-company {
+      font-size: 12px;
+      color: var(--muted);
       margin-bottom: 6px;
     }
-
     .exp-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--tag);
+      color: var(--muted);
+    }
+
+    /* ── wins ── */
+    .wins-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .win {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s;
+    }
+    .win:hover { border-color: var(--muted); }
+    .win-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--tag);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .win-text {}
+    .win-text h4 { font-size: 12.5px; font-weight: 500; margin-bottom: 2px; }
+    .win-text p  { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+
+    /* ── about / bio ── */
+    .bio-text {
       font-size: 13px;
       color: var(--muted);
       line-height: 1.7;
     }
+    .bio-text strong { color: var(--text); font-weight: 500; }
 
-    .tag-row {
+    /* ── connect ── */
+    .connect-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
+      flex-direction: column;
+      gap: 10px;
     }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      letter-spacing: 0.02em;
+    .connect-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
     }
-
-    /* ── Skills Grid ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      transition: border-color 0.2s;
-    }
-
-    .skill-card:hover { border-color: var(--accent); }
-
-    .skill-card h3 {
+    .connect-row:last-child { border-bottom: none; }
+    .connect-label {
       font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-
-    .skill-card p {
+    .connect-link {
       font-size: 12px;
       color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .skill-icon {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    /* ── Wins ── */
-    .wins-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .win-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      transition: all 0.2s;
-      cursor: default;
-    }
-
-    .win-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-
-    .win-card .win-icon { font-size: 22px; margin-bottom: 8px; }
-    .win-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .win-card p  { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-    /* ── Contact ── */
-    .contact-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      text-align: center;
-    }
-
-    .contact-box h2 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .contact-box p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .contact-links {
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .contact-btn {
-      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      transition: all 0.2s;
+      gap: 4px;
     }
+    .connect-link:hover { color: var(--text); }
 
-    .contact-btn.primary {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    .contact-btn.primary:hover { opacity: 0.85; color: var(--bg); }
-
-    .contact-btn.secondary {
-      border: 1px solid var(--border);
-      color: var(--muted);
-      background: var(--bg);
-    }
-
-    .contact-btn.secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* ── Footer ── */
+    /* ── footer ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 24px 0;
-      margin-top: 16px;
+      padding: 20px 0 32px;
     }
-
     .footer-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
       color: var(--muted);
-      font-family: var(--font-mono);
     }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .footer-socials {
+      display: flex;
+      gap: 14px;
     }
-
-    .fade-up {
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
+    .footer-socials a {
+      color: var(--muted);
+      display: flex;
+      align-items: center;
     }
+    .footer-socials a:hover { color: var(--text); }
 
-    .fade-up:nth-child(1) { animation-delay: 0.05s; }
-    .fade-up:nth-child(2) { animation-delay: 0.12s; }
-    .fade-up:nth-child(3) { animation-delay: 0.19s; }
-    .fade-up:nth-child(4) { animation-delay: 0.26s; }
-
-    /* ── Status dot ── */
-    .status {
-      display: inline-flex;
+    /* ── status ── */
+    .status-row {
+      display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--font-mono);
       margin-top: 10px;
     }
-
     .dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #22c55e;
-      animation: pulse 2s infinite;
+      animation: blink 2.5s ease-in-out infinite;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.4; }
+    @keyframes blink {
+      0%,100% { opacity:1; }
+      50% { opacity:.3; }
     }
+    .status-text { font-size: 12px; color: var(--muted); }
 
-    /* ── Responsive ── */
-    @media (max-width: 520px) {
-      .hero { flex-direction: column; gap: 20px; }
-      .skills-grid, .wins-grid { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 4px; }
-      .exp-date { padding-bottom: 4px; }
-      .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+    /* ── responsive ── */
+    @media (max-width: 480px) {
+      .hero { flex-direction: column; gap: 14px; }
+      .wins-grid { grid-template-columns: 1fr; }
+      .exp-row { grid-template-columns: 1fr; }
+      .exp-date { font-size: 11px; margin-bottom: 3px; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="nav-inner">
-      <span class="nav-logo">wanchat.xyz</span>
-      <ul class="nav-links">
-        <li><a href="#about">about</a></li>
-        <li><a href="#experience">exp</a></li>
-        <li><a href="#skills">skills</a></li>
-        <li><a href="#contact">contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- ── MAIN ── -->
-  <main class="container">
-
-    <!-- Hero -->
-    <div class="hero fade-up" id="about">
-      <!-- Replace src below with your actual pixel avatar image path -->
-      <div class="pixel-avatar">
-        <img src="avatar.png" alt="Wanchat pixel avatar"
-             onerror="this.parentElement.innerHTML='🧑‍💻'" />
+    <!-- nav -->
+    <nav>
+      <div class="nav-inner">
+        <div class="nav-logo">
+          <div class="logo-fallback">w</div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#about">about</a></li>
+          <li><a href="#experience">experience</a></li>
+          <li><a href="#connect">connect</a></li>
+        </ul>
+        <div class="nav-socials">
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/wanchat" target="_blank" title="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com/wanchattee" target="_blank" title="GitHub">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
       </div>
+    </nav>
 
-      <div class="hero-text">
+    <!-- hero -->
+    <div class="hero">
+      <div class="avatar">
+        <!-- วางไฟล์ avatar.png ไว้ใน folder เดียวกัน -->
+        <img src="avatar.png" alt="wanchat"
+             onerror="this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>🧑‍💻</div>'" />
+      </div>
+      <div class="hero-body" id="about">
         <h1>wanchat</h1>
-        <div class="role">senior product owner · coin listing @ bitkub</div>
+        <div class="role">senior product owner · coin listing</div>
         <p>
-          Data-driven Digital Asset professional with experience in Web3 ecosystems,
-          focused on crypto exchanges and DeFi protocols. Proven ability in
-          market-volume modelling, asset-listing due-diligence, and Thai SEC compliance.
+          data-driven digital asset professional working in web3 — focused on crypto exchanges,
+          defi protocols, and thai sec compliance. proficient in python, sql, and web3 api integrations.
         </p>
-        <div class="status">
+        <div class="status-row">
           <span class="dot"></span>
-          available for collaborations · Bangkok, TH
-        </div>
-        <div class="social-row">
-          <a class="social-btn" href="https://linkedin.com/in/wanchat" target="_blank">
-            <!-- LinkedIn SVG -->
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            linkedin
-          </a>
-          <a class="social-btn" href="mailto:wanchat@wanchat.xyz">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            email
-          </a>
-          <a class="social-btn" href="https://github.com/wanchat" target="_blank">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            github
-          </a>
+          <span class="status-text">based in bangkok, thailand</span>
         </div>
       </div>
     </div>
 
-    <div class="divider"></div>
+    <!-- about -->
+    <section>
+      <div class="section-title">about</div>
+      <p class="bio-text">
+        i'm a product owner at <strong>bitkub</strong>, thailand's largest crypto exchange,
+        leading the coin listing function. previously i was a digital asset analyst at
+        <strong>maxbit</strong>, building market-volume models and on-chain research pipelines.<br /><br />
+        outside of work i enjoy exploring new blockchain ecosystems, reading about macro finance,
+        and occasionally tinkering with python scripts to automate things.
+      </p>
+    </section>
 
-    <!-- Experience -->
-    <section id="experience" class="fade-up">
-      <div class="section-label">// experience</div>
-      <div class="exp-list">
+    <!-- experience -->
+    <section id="experience">
+      <div class="section-title">experience</div>
 
-        <div class="exp-item">
-          <div class="exp-date">Oct 2025 — Now</div>
-          <div class="exp-content">
+      <div class="exp-row">
+        <div class="exp-date">Oct 2025 – now</div>
+        <div class="exp-right">
+          <div class="exp-header">
+            <img class="exp-logo" src="bitkub.png" alt="Bitkub"
+                 onerror="this.outerHTML='<div class=\'exp-logo-fallback\'>🟢</div>'" />
             <div class="exp-title">Senior Product Owner · Coin Listing</div>
-            <div class="exp-company">Bitkub · Full-time</div>
-            <div class="exp-desc">
-              Leading the coin listing product at Thailand's largest crypto exchange —
-              overseeing due-diligence pipelines, Thai SEC compliance workflows,
-              and cross-functional coordination with legal, tech, and market teams.
-            </div>
-            <div class="tag-row">
-              <span class="tag">Product Ownership</span>
-              <span class="tag">Coin Listing</span>
-              <span class="tag">Thai SEC</span>
-              <span class="tag">DeFi</span>
-            </div>
+          </div>
+          <div class="exp-company">Bitkub · Bangkok</div>
+          <div class="exp-desc">leading coin listing pipeline — due-diligence, thai sec compliance, cross-functional coordination with legal, tech, and markets teams.</div>
+          <div class="tags">
+            <span class="tag">product</span>
+            <span class="tag">coin listing</span>
+            <span class="tag">thai sec</span>
+            <span class="tag">web3</span>
           </div>
         </div>
+      </div>
 
-        <div class="exp-item">
-          <div class="exp-date">Apr 2024 — Nov 2025</div>
-          <div class="exp-content">
+      <div class="exp-row">
+        <div class="exp-date">Apr 2024 – Nov 2025</div>
+        <div class="exp-right">
+          <div class="exp-header">
+            <img class="exp-logo" src="maxbit.png" alt="Maxbit"
+                 onerror="this.outerHTML='<div class=\'exp-logo-fallback\'>🟢</div>'" />
             <div class="exp-title">Digital Asset Analyst</div>
-            <div class="exp-company">Maxbit Digital Asset · Full-time · Bangkok</div>
-            <div class="exp-desc">
-              Continuously monitored and analysed digital assets — cryptocurrencies,
-              tokens, and blockchain technologies — to identify trends and investment
-              opportunities. Built market-volume models and Web3/API integrations
-              (CoinMarketCap, CoinGecko, SEC).
-            </div>
-            <div class="tag-row">
-              <span class="tag">Data Analysis</span>
-              <span class="tag">Blockchain</span>
-              <span class="tag">Python</span>
-              <span class="tag">SQL</span>
-              <span class="tag">CoinGecko API</span>
-            </div>
+          </div>
+          <div class="exp-company">Maxbit Digital Asset · Bangkok</div>
+          <div class="exp-desc">monitored and analysed crypto assets, built market-volume models, integrated web3 apis (coingecko, coinmarketcap, sec) to surface actionable insights.</div>
+          <div class="tags">
+            <span class="tag">python</span>
+            <span class="tag">sql</span>
+            <span class="tag">blockchain</span>
+            <span class="tag">data analysis</span>
           </div>
         </div>
+      </div>
 
-        <div class="exp-item">
-          <div class="exp-date">2021 — Nov 2025</div>
-          <div class="exp-content">
+      <div class="exp-row">
+        <div class="exp-date">2021 – Nov 2025</div>
+        <div class="exp-right">
+          <div class="exp-header">
+            <img class="exp-logo" src="wanchat-co.png" alt="wanchat"
+                 onerror="this.outerHTML='<div class=\'exp-logo-fallback\'>🪑</div>'" />
             <div class="exp-title">Business Owner</div>
-            <div class="exp-company">wanchat · Self-employed · Chonburi (Hybrid)</div>
-            <div class="exp-desc">
-              Founded and operated an independent business, applying finance and
-              investment knowledge to manage operations, strategy, and growth
-              over nearly five years.
-            </div>
-            <div class="tag-row">
-              <span class="tag">Finance</span>
-              <span class="tag">Strategy</span>
-              <span class="tag">Operations</span>
-            </div>
+          </div>
+          <div class="exp-company">wanchat · Chonburi (hybrid)</div>
+          <div class="exp-desc">founded and ran an independent business — managed operations, finance, and growth strategy over ~5 years.</div>
+          <div class="tags">
+            <span class="tag">finance</span>
+            <span class="tag">operations</span>
           </div>
         </div>
+      </div>
 
-        <div class="exp-item">
-          <div class="exp-date">Aug 2019 — Feb 2020</div>
-          <div class="exp-content">
+      <div class="exp-row">
+        <div class="exp-date">Aug 2019 – Feb 2020</div>
+        <div class="exp-right">
+          <div class="exp-header">
+            <img class="exp-logo" src="bangkokbank.png" alt="Bangkok Bank"
+                 onerror="this.outerHTML='<div class=\'exp-logo-fallback\'>🔵</div>'" />
             <div class="exp-title">Marketing Officer</div>
-            <div class="exp-company">Bangkok Bank · Full-time · Chon Buri</div>
-            <div class="exp-desc">
-              Introduced and recommended financial instruments according to each
-              customer's preference profile. Acted as a financial & investment
-              advisor across customer target groups.
-            </div>
-            <div class="tag-row">
-              <span class="tag">Marketing</span>
-              <span class="tag">Finance</span>
-              <span class="tag">Investment Advisory</span>
-            </div>
+          </div>
+          <div class="exp-company">Bangkok Bank · Chon Buri</div>
+          <div class="exp-desc">recommended financial instruments to customers and acted as investment advisor across customer segments.</div>
+          <div class="tags">
+            <span class="tag">marketing</span>
+            <span class="tag">finance</span>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills" class="fade-up">
-      <div class="section-label">// skills & tools</div>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">⛓️</div>
-          <h3>Blockchain & Web3</h3>
-          <p>On-chain analysis, DeFi protocol research, tokenomics evaluation, and smart-contract literacy across EVM chains.</p>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">📊</div>
-          <h3>Data & Analytics</h3>
-          <p>Python, SQL, market-volume modelling, and API integrations with CoinMarketCap, CoinGecko, and Thai SEC data.</p>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">🏛️</div>
-          <h3>Compliance & Regulation</h3>
-          <p>Thai SEC listing requirements, digital asset due-diligence frameworks, and regulatory risk assessment.</p>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">🗺️</div>
-          <h3>Product & Strategy</h3>
-          <p>Roadmap planning, stakeholder alignment, cross-functional coordination, and go-to-market execution.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Highlights -->
-    <section class="fade-up">
-      <div class="section-label">// highlights</div>
+    <!-- wins -->
+    <section>
+      <div class="section-title">some wins &amp; whims</div>
       <div class="wins-grid">
-        <div class="win-card">
-          <div class="win-icon">🏆</div>
-          <h4>Bitkub Coin Listing Lead</h4>
-          <p>Driving Thailand's crypto listing pipeline at the nation's top exchange.</p>
+        <div class="win">
+          <div class="win-thumb">🏆</div>
+          <div class="win-text">
+            <h4>bitkub coin listing lead</h4>
+            <p>driving thailand's crypto listing pipeline at the nation's top exchange</p>
+          </div>
         </div>
-        <div class="win-card">
-          <div class="win-icon">🔍</div>
-          <h4>Asset Due-Diligence</h4>
-          <p>Deep-dive fundamental research across 50+ digital asset listing reviews.</p>
+        <div class="win">
+          <div class="win-thumb">🔍</div>
+          <div class="win-text">
+            <h4>50+ asset reviews</h4>
+            <p>deep fundamental due-diligence across dozens of digital asset listings</p>
+          </div>
         </div>
-        <div class="win-card">
-          <div class="win-icon">⚙️</div>
-          <h4>Web3 API Integrations</h4>
-          <p>Built automated data pipelines pulling live market data for analysis.</p>
+        <div class="win">
+          <div class="win-thumb">⚙️</div>
+          <div class="win-text">
+            <h4>web3 api pipelines</h4>
+            <p>automated market data pipelines using coingecko & sec apis</p>
+          </div>
         </div>
-        <div class="win-card">
-          <div class="win-icon">📜</div>
-          <h4>Thai SEC Compliance</h4>
-          <p>Proven track record navigating Thai digital asset regulatory frameworks.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="fade-up">
-      <div class="section-label">// contact</div>
-      <div class="contact-box">
-        <h2>Let's connect</h2>
-        <p>Open to collaborations, Web3 projects, and interesting conversations about digital assets.</p>
-        <div class="contact-links">
-          <a class="contact-btn primary" href="mailto:wanchat@wanchat.xyz">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Send Email
-          </a>
-          <a class="contact-btn secondary" href="https://linkedin.com/in/wanchat" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 23.2 24 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
+        <div class="win">
+          <div class="win-thumb">📜</div>
+          <div class="win-text">
+            <h4>thai sec compliance</h4>
+            <p>proven track record navigating thailand's digital asset regulations</p>
+          </div>
         </div>
       </div>
     </section>
 
-  </main>
+    <!-- connect -->
+    <section id="connect">
+      <div class="section-title">connect</div>
+      <div class="connect-links">
+        <div class="connect-row">
+          <span class="connect-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            email
+          </span>
+          <a class="connect-link" href="mailto:wanchat@wanchat.xyz">
+            wanchat@wanchat.xyz
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="connect-row">
+          <span class="connect-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            linkedin
+          </span>
+          <a class="connect-link" href="https://linkedin.com/in/wanchat" target="_blank">
+            linkedin.com/in/wanchat
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="connect-row">
+          <span class="connect-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            github
+          </span>
+          <a class="connect-link" href="https://github.com/wanchattee" target="_blank">
+            github.com/wanchattee
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-inner">
-      <span>wanchat · 2026</span>
-      <span>built with ♥ · Bangkok</span>
-    </div>
-  </footer>
+    <!-- footer -->
+    <footer>
+      <div class="footer-inner">
+        <span>wanchat · 2026</span>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/wanchat" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/wanchattee" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+    </footer>
 
-  <script>
-    // Intersection Observer for fade-in on scroll
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.animationPlayState = 'running';
-          observer.unobserve(e.target);
-        }
-      }),
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.fade-up').forEach(el => {
-      el.style.animationPlayState = 'paused';
-      observer.observe(el);
-    });
-  </script>
+  </div>
 </body>
 </html>
